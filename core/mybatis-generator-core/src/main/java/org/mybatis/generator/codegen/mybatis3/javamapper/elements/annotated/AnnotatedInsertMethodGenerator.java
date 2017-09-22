@@ -53,8 +53,10 @@ public class AnnotatedInsertMethodGenerator extends InsertMethodGenerator {
         javaIndent(valuesClause, 1);
 
         insertClause.append("\"insert into "); //$NON-NLS-1$
+        insertClause.append("`");
         insertClause.append(escapeStringForJava(introspectedTable
                 .getFullyQualifiedTableNameAtRuntime()));
+        insertClause.append("`");
         insertClause.append(" ("); //$NON-NLS-1$
 
         valuesClause.append("\"values ("); //$NON-NLS-1$

@@ -46,8 +46,10 @@ public class Ibatis2FormattingUtilities {
     public static String getEscapedColumnName(
             IntrospectedColumn introspectedColumn) {
         StringBuilder sb = new StringBuilder();
+        sb.append("`");
         sb.append(escapeStringForIbatis2(introspectedColumn
                 .getActualColumnName()));
+        sb.append("`");
 
         if (introspectedColumn.isColumnNameDelimited()) {
             sb.insert(0, introspectedColumn.getContext()
@@ -70,7 +72,9 @@ public class Ibatis2FormattingUtilities {
         if (stringHasValue(introspectedColumn.getTableAlias())) {
             StringBuilder sb = new StringBuilder();
 
+            sb.append("`");
             sb.append(introspectedColumn.getTableAlias());
+            sb.append("`");
             sb.append('.');
             sb.append(getEscapedColumnName(introspectedColumn));
             return sb.toString();

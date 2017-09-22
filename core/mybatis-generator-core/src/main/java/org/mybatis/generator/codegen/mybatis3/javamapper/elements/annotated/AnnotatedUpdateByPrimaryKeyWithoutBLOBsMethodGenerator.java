@@ -51,7 +51,9 @@ public class AnnotatedUpdateByPrimaryKeyWithoutBLOBsMethodGenerator
         StringBuilder sb = new StringBuilder();
         javaIndent(sb, 1);
         sb.append("\"update "); //$NON-NLS-1$
+        sb.append("`");
         sb.append(escapeStringForJava(introspectedTable.getFullyQualifiedTableNameAtRuntime()));
+        sb.append("`");
         sb.append("\","); //$NON-NLS-1$
         method.addAnnotation(sb.toString());
 

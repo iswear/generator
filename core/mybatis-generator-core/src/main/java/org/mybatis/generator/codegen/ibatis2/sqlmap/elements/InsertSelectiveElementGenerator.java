@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2016 the original author or authors.
+ *    Copyright 2006-2017 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -66,7 +66,9 @@ public class InsertSelectiveElementGenerator extends
         StringBuilder sb = new StringBuilder();
 
         sb.append("insert into "); //$NON-NLS-1$
+        sb.append("`");
         sb.append(introspectedTable.getFullyQualifiedTableNameAtRuntime());
+        sb.append("`");
         answer.addElement(new TextElement(sb.toString()));
 
         XmlElement insertElement = new XmlElement("dynamic"); //$NON-NLS-1$

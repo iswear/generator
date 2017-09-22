@@ -70,8 +70,10 @@ public class SelectByExampleWithBLOBsElementGenerator extends
 
         sb.setLength(0);
         sb.append("from "); //$NON-NLS-1$
+        sb.append("`");
         sb.append(introspectedTable
                 .getAliasedFullyQualifiedTableNameAtRuntime());
+        sb.append("`");
         answer.addElement(new TextElement(sb.toString()));
 
         XmlElement isParameterPresenteElement = new XmlElement(

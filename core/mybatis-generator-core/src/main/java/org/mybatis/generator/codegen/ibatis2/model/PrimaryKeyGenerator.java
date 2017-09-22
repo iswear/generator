@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2016 the original author or authors.
+ *    Copyright 2006-2017 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -57,6 +57,9 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
 
         TopLevelClass topLevelClass = new TopLevelClass(introspectedTable
                 .getPrimaryKeyType());
+        topLevelClass.addAnnotation("@Data");
+        topLevelClass.addAnnotation("@ToString(callSuper = true)");
+        topLevelClass.addSuperInterface(new FullyQualifiedJavaType("java.io.Serializable"));
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
 
@@ -74,6 +77,9 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
             }
 
             Field field = getJavaBeansField(introspectedColumn, context, introspectedTable);
+            field.addJavaDocLine("/**");
+            field.addJavaDocLine(" * " + (introspectedColumn.getRemarks() == null ? "" : introspectedColumn.getRemarks()));
+            field.addJavaDocLine(" */");
             if (plugins.modelFieldGenerated(field, topLevelClass,
                     introspectedColumn, introspectedTable,
                     Plugin.ModelClassType.PRIMARY_KEY)) {
@@ -81,19 +87,19 @@ public class PrimaryKeyGenerator extends AbstractJavaGenerator {
                 topLevelClass.addImportedType(field.getType());
             }
 
-            Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
-            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
-                    introspectedColumn, introspectedTable,
-                    Plugin.ModelClassType.PRIMARY_KEY)) {
-                topLevelClass.addMethod(method);
-            }
-
-            method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
-            if (plugins.modelSetterMethodGenerated(method, topLevelClass,
-                    introspectedColumn, introspectedTable,
-                    Plugin.ModelClassType.PRIMARY_KEY)) {
-                topLevelClass.addMethod(method);
-            }
+//            Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
+//            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
+//                    introspectedColumn, introspectedTable,
+//                    Plugin.ModelClassType.PRIMARY_KEY)) {
+//                topLevelClass.addMethod(method);
+//            }
+//
+//            method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
+//            if (plugins.modelSetterMethodGenerated(method, topLevelClass,
+//                    introspectedColumn, introspectedTable,
+//                    Plugin.ModelClassType.PRIMARY_KEY)) {
+//                topLevelClass.addMethod(method);
+//            }
         }
 
         List<CompilationUnit> answer = new ArrayList<CompilationUnit>();

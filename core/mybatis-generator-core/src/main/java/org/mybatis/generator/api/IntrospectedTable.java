@@ -527,14 +527,14 @@ public abstract class IntrospectedTable {
         setSqlMapAliasedFullyQualifiedRuntimeTableName(calculateSqlMapAliasedFullyQualifiedRuntimeTableName());
 
         setCountByExampleStatementId("countByExample"); //$NON-NLS-1$
-        setDeleteByExampleStatementId("deleteByExample"); //$NON-NLS-1$
-        setDeleteByPrimaryKeyStatementId("deleteByPrimaryKey"); //$NON-NLS-1$
-        setInsertStatementId("insert"); //$NON-NLS-1$
-        setInsertSelectiveStatementId("insertSelective"); //$NON-NLS-1$
-        setSelectAllStatementId("selectAll"); //$NON-NLS-1$
-        setSelectByExampleStatementId("selectByExample"); //$NON-NLS-1$
-        setSelectByExampleWithBLOBsStatementId("selectByExampleWithBLOBs"); //$NON-NLS-1$
-        setSelectByPrimaryKeyStatementId("selectByPrimaryKey"); //$NON-NLS-1$
+        setDeleteByExampleStatementId("removeByExample"); //$NON-NLS-1$
+        setDeleteByPrimaryKeyStatementId("removeByPrimaryKey"); //$NON-NLS-1$
+        setInsertStatementId("save"); //$NON-NLS-1$
+        setInsertSelectiveStatementId("saveSelective"); //$NON-NLS-1$
+        setSelectAllStatementId("listAll"); //$NON-NLS-1$
+        setSelectByExampleStatementId("listByExample"); //$NON-NLS-1$
+        setSelectByExampleWithBLOBsStatementId("listByExampleWithBLOBs"); //$NON-NLS-1$
+        setSelectByPrimaryKeyStatementId("getByPrimaryKey"); //$NON-NLS-1$
         setUpdateByExampleStatementId("updateByExample"); //$NON-NLS-1$
         setUpdateByExampleSelectiveStatementId("updateByExampleSelective"); //$NON-NLS-1$
         setUpdateByExampleWithBLOBsStatementId("updateByExampleWithBLOBs"); //$NON-NLS-1$

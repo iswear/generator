@@ -216,8 +216,8 @@ public class JavaBeansUtil {
         field.setVisibility(JavaVisibility.PRIVATE);
         field.setType(fqjt);
         field.setName(property);
-        context.getCommentGenerator().addFieldComment(field,
-                introspectedTable, introspectedColumn);
+//        context.getCommentGenerator().addFieldComment(field,
+//                introspectedTable, introspectedColumn);
 
         return field;
     }

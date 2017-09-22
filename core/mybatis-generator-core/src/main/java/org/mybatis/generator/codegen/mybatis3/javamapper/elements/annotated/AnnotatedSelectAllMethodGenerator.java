@@ -81,8 +81,10 @@ public class AnnotatedSelectAllMethodGenerator extends SelectAllMethodGenerator 
         sb.setLength(0);
         javaIndent(sb, 1);
         sb.append("\"from "); //$NON-NLS-1$
+        sb.append("`");
         sb.append(escapeStringForJava(introspectedTable
                 .getAliasedFullyQualifiedTableNameAtRuntime()));
+        sb.append("`");
         sb.append('\"');
 
         String orderByClause = introspectedTable.getTableConfigurationProperty(

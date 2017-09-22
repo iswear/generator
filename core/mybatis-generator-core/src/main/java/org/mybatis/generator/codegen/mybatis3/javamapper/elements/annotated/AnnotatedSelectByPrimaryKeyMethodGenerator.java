@@ -83,8 +83,10 @@ public class AnnotatedSelectByPrimaryKeyMethodGenerator extends SelectByPrimaryK
         sb.setLength(0);
         javaIndent(sb, 1);
         sb.append("\"from "); //$NON-NLS-1$
+        sb.append("`");
         sb.append(escapeStringForJava(introspectedTable
                 .getAliasedFullyQualifiedTableNameAtRuntime()));
+        sb.append("`");
         sb.append("\","); //$NON-NLS-1$
         method.addAnnotation(sb.toString());
 

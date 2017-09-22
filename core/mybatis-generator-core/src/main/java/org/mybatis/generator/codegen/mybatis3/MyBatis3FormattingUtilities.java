@@ -23,7 +23,7 @@ import org.mybatis.generator.api.IntrospectedColumn;
 /**
  * The Class MyBatis3FormattingUtilities.
  *
- * @author Jeff Butler
+ * @author Jeff Butlerƒ
  */
 public class MyBatis3FormattingUtilities {
 
@@ -116,9 +116,10 @@ public class MyBatis3FormattingUtilities {
     public static String getEscapedColumnName(
             IntrospectedColumn introspectedColumn) {
         StringBuilder sb = new StringBuilder();
+        sb.append("`");
         sb.append(escapeStringForMyBatis3(introspectedColumn
                 .getActualColumnName()));
-
+        sb.append("`");
         if (introspectedColumn.isColumnNameDelimited()) {
             sb.insert(0, introspectedColumn.getContext()
                     .getBeginningDelimiter());
@@ -140,7 +141,9 @@ public class MyBatis3FormattingUtilities {
         if (stringHasValue(introspectedColumn.getTableAlias())) {
             StringBuilder sb = new StringBuilder();
 
+            sb.append("`");
             sb.append(introspectedColumn.getTableAlias());
+            sb.append("`");
             sb.append('.');
             sb.append(getEscapedColumnName(introspectedColumn));
             return sb.toString();

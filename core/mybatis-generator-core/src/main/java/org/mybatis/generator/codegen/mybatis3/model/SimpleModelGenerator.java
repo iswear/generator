@@ -58,6 +58,9 @@ public class SimpleModelGenerator extends AbstractJavaGenerator {
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(
                 introspectedTable.getBaseRecordType());
         TopLevelClass topLevelClass = new TopLevelClass(type);
+        topLevelClass.addAnnotation("@Data");
+        topLevelClass.addAnnotation("@ToString(callSuper = true)");
+        topLevelClass.addSuperInterface(new FullyQualifiedJavaType("java.io.Serializable"));
         topLevelClass.setVisibility(JavaVisibility.PUBLIC);
         commentGenerator.addJavaFileComment(topLevelClass);
 
@@ -87,6 +90,9 @@ public class SimpleModelGenerator extends AbstractJavaGenerator {
             }
 
             Field field = getJavaBeansField(introspectedColumn, context, introspectedTable);
+            field.addJavaDocLine("/**");
+            field.addJavaDocLine(" * " + (introspectedColumn.getRemarks() == null ? "" : introspectedColumn.getRemarks()));
+            field.addJavaDocLine(" */");
             if (plugins.modelFieldGenerated(field, topLevelClass,
                     introspectedColumn, introspectedTable,
                     Plugin.ModelClassType.BASE_RECORD)) {
@@ -94,21 +100,22 @@ public class SimpleModelGenerator extends AbstractJavaGenerator {
                 topLevelClass.addImportedType(field.getType());
             }
 
-            Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
-            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
-                    introspectedColumn, introspectedTable,
-                    Plugin.ModelClassType.BASE_RECORD)) {
-                topLevelClass.addMethod(method);
-            }
+//            Method method = getJavaBeansGetter(introspectedColumn, context, introspectedTable);
+//            if (plugins.modelGetterMethodGenerated(method, topLevelClass,
+//                    introspectedColumn, introspectedTable,
+//                    Plugin.ModelClassType.BASE_RECORD)) {
+//                topLevelClass.addMethod(method);
+//            }
+//
+//            if (!introspectedTable.isImmutable()) {
+//                method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
+//                if (plugins.modelSetterMethodGenerated(method, topLevelClass,
+//                        introspectedColumn, introspectedTable,
+//                        Plugin.ModelClassType.BASE_RECORD)) {
+//                    topLevelClass.addMethod(method);
+//                }
+//            }
 
-            if (!introspectedTable.isImmutable()) {
-                method = getJavaBeansSetter(introspectedColumn, context, introspectedTable);
-                if (plugins.modelSetterMethodGenerated(method, topLevelClass,
-                        introspectedColumn, introspectedTable,
-                        Plugin.ModelClassType.BASE_RECORD)) {
-                    topLevelClass.addMethod(method);
-                }
-            }
         }
 
         List<CompilationUnit> answer = new ArrayList<CompilationUnit>();
